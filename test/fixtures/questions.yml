@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  answer: 1
+  time_limit: 1
+  options: 
+
+two:
+  text: MyString
+  answer: 1
+  time_limit: 1
+  options: 

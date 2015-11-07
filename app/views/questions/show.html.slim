@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Text:
+  = @question.text
+p
+  strong Answer:
+  = @question.answer
+p
+  strong Time limit:
+  = @question.time_limit
+p
+  strong Options:
+  = @question.options
+
+= link_to 'Edit', edit_question_path(@question)
+'|
+= link_to 'Back', questions_path
