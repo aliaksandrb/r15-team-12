@@ -1,0 +1,4 @@
+= form_tag(controller: :games, action: :start, method: 'post') do
+  = select_tag(:hero_id, options_for_select(HERO_SKIN_MAP.to_a))
+  = submit_tag("Start")
+

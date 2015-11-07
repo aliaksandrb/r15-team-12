@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Responder email:
+  = @game.player_email
+p
+  strong Game time:
+  = @game.game_time
+p
+  strong Quiz health:
+  = @game.quiz_health
+p
+  strong Player health:
+  = @game.player_health
+p
+  strong Quiz:
+  = @game.quiz_id
+
+= link_to 'Edit', edit_game_path(@game)
+'|
+= link_to 'Back', games_path
