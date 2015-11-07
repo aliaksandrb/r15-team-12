@@ -1,5 +1,9 @@
 class Question < ActiveRecord::Base
   belongs_to :quiz
+
+  PLAYER_WIN = 'player_win'.freeze
+  QUIZ_WIN = 'quize_win'.freeze
+  TIMEOUT = 'timeout'.freeze
 end
 
 # == Schema Information
