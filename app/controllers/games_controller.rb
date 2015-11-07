@@ -5,10 +5,13 @@ class GamesController < ApplicationController
   end
 
   def start
-    session[:player_hero_id] = params[:hero_id]
     @question = @game.questions.first
     @user_answer = @game.user_answers.build
     @user_answer.question = @question
+
+    session[:player_hero_id] = params[:hero_id]
+    session[:game_id] = @game.id
+    session[:question_id] = @question.id
   end
 
   # GET /games

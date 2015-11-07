@@ -25,6 +25,8 @@ class UserAnswersController < ApplicationController
   # POST /user_answers.json
   def create
     @user_answer = UserAnswer.new(user_answer_params)
+    @user_answer.game_id = session[:game_id]
+    @user_answer.question_id = session[:question_id]
 
     respond_to do |format|
       if @user_answer.save
