@@ -21,6 +21,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :user_answers
   resources :games do
     member do
       get 'choose_hero'

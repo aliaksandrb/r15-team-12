@@ -1,0 +1,27 @@
+h1 Listing user_answers
+
+table
+  thead
+    tr
+      th Question
+      th Value
+      th Game
+      th Timeout
+      th
+      th
+      th
+
+  tbody
+    - @user_answers.each do |user_answer|
+      tr
+        td = user_answer.question
+        td = user_answer.value
+        td = user_answer.game
+        td = user_answer.timeout
+        td = link_to 'Show', user_answer
+        td = link_to 'Edit', edit_user_answer_path(user_answer)
+        td = link_to 'Destroy', user_answer, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New User answer', new_user_answer_path

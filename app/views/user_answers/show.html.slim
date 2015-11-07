@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Question:
+  = @user_answer.question
+p
+  strong Value:
+  = @user_answer.value
+p
+  strong Game:
+  = @user_answer.game
+p
+  strong Timeout:
+  = @user_answer.timeout
+
+= link_to 'Edit', edit_user_answer_path(@user_answer)
+'|
+= link_to 'Back', user_answers_path
