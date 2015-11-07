@@ -5,10 +5,14 @@ class ArrayOfOptionsInput < SimpleForm::Inputs::CollectionInput#StringInput#Simp
     options_collection = collection || object.public_send(attribute_name)
 
     fields = if options_collection.any?
+      fields_number = 0
       options_collection.map do |item|
+        fields_number += 1
 
         @builder.text_field(nil,
-            input_html_options.merge(value: item.values.first,
+          input_html_options.merge(
+            value: item.values.first,
+            label: "Option: #{fields_number}",
             name: "#{object_name}[#{attribute_name}][]",
             class: 'form-control'
           )
@@ -18,6 +22,7 @@ class ArrayOfOptionsInput < SimpleForm::Inputs::CollectionInput#StringInput#Simp
       [@builder.text_field(nil,
         input_html_options.merge(
           value: '',
+          label: 'Option 1: ',
           name: "#{object_name}[#{attribute_name}][]",
           class: 'form-control')
       ), nil]

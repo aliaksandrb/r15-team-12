@@ -1,6 +1,8 @@
 .form-inputs
-  = f
   = f.input :text
-  = f.input :options, as: :array_of_options, collection: question.options
-  = f.input :answer
+  .answer-options
+    = f.input :options, as: :array_of_options, collection: question.options, label: 'Proposed Answers'
+    = link_to 'Add More', '#', class: 'add-more-options-link', data: { number: number }
+
+  = f.input :answer, label: 'Right answer number'
   = f.input :time_limit
