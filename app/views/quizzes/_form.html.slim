@@ -11,7 +11,7 @@
       .panel-heading Question #{index + 1}:
       .panel-body
         = f.simple_fields_for :questions, question do |builder|
-          = render partial: 'questions/question_fields', locals: { f: builder }
+          = render partial: 'questions/question_fields', locals: { f: builder, question: question }
 
   .form-actions
     = f.button :submit

@@ -1,4 +1,6 @@
 .form-inputs
+  = f
   = f.input :text
+  = f.input :options, as: :array_of_options, collection: question.options
   = f.input :answer
   = f.input :time_limit
