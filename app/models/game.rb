@@ -8,7 +8,7 @@ class Game < ActiveRecord::Base
   has_many :questions, through: :quiz
   has_many :answered_questions, class_name: 'UserAnswer', dependent: :destroy
 
-  before_save :assign_default_values
+  before_create :assign_default_values
 
   protected
 
