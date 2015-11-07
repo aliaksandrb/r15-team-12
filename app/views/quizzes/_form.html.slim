@@ -6,5 +6,12 @@
     = f.input :fail_limit
     = f.input :author_email
 
+  - @quiz.questions.each_with_index do |question, index|
+    .panel.panel-info
+      .panel-heading Question #{index + 1}:
+      .panel-body
+        = f.simple_fields_for :questions, question do |builder|
+          = render partial: 'questions/question_fields', locals: { f: builder }
+
   .form-actions
     = f.button :submit
