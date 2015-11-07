@@ -14,9 +14,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # custom
+gem 'puma'
 gem 'slim-rails'
 gem 'bootstrap-sass'
-gem 'puma'
+gem 'simple_form'
 
 gem 'rails_12factor', group: :production
 
@@ -28,9 +29,11 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'better_errors'
+  gem 'quiet_assets'
+  gem 'rails_layout'
   gem 'spring'
+  gem 'annotate'
 end
 
 # Use Unicorn as the app server
