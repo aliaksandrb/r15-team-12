@@ -39,6 +39,10 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
+  def all_games
+    @games = Game.all
+  end
+
   # GET /games/1
   # GET /games/1.json
   def show

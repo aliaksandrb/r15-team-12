@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'games', to: 'games#all_games'
+
   root 'quizzes#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
