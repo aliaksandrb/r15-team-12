@@ -1,20 +1,8 @@
-= session[:player_hero_id]
+.battlefield
+  = render partial: 'battlefield'
 
-.question-to-show
-  = render partial: 'questions/question_to_show'
-
-.question-options-to-show
-  = render partial: 'questions/options_to_show'
-
-
-
-
-
-
-
-
-
-
-
-
-
+.question
+  .question-to-show
+    = render partial: 'questions/question_to_show'
+  .question-options-to-show
+    = render partial: 'questions/options_to_show'

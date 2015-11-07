@@ -5,8 +5,8 @@ html.no-js lang="en-us"
     meta http-equiv="x-ua-compatible" content="ie=edge"
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     title
-      = content_for?(:title) ? yield(:title) : 'Vagrant'
-    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Vagrant'}"
+      = content_for?(:title) ? yield(:title) : 'Quiz Fighter'
+    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Fight against quizzes!'}"
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => true
     == javascript_include_tag 'application', 'data-turbolinks-track' => true
     == csrf_meta_tags
@@ -24,4 +24,5 @@ html.no-js lang="en-us"
         == yield
 
     footer
-      p &copy; Company 2015
+      .container
+        p &copy; Quiz Fighter 2015
