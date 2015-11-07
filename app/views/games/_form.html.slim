@@ -1,12 +1,9 @@
-= simple_form_for(@game) do |f|
+= simple_form_for([@quiz, @game]) do |f|
   = f.error_notification
 
   .form-inputs
+    = f.association :quiz, disabled: true
     = f.input :player_email
-    = f.input :game_time
-    = f.input :quiz_health
-    = f.input :player_health
-    = f.input :quiz_id
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-success'

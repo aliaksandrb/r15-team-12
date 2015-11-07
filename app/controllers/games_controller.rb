@@ -23,8 +23,8 @@ class GamesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to the_end_game_url }
-        format.js { render js: "window.location = '#{the_end_game_url}'" }
+        format.html { redirect_to the_end_quiz_game_url(@game.quiz, @game) }
+        format.js { render js: "window.location = '#{the_end_quiz_game_url(@game.quiz, @game)}'" }
       end
     end
   end
@@ -46,7 +46,8 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = Game.new
+    @quiz = Quiz.find(params[:quiz_id])
+    @game = @quiz.games.build
   end
 
   # GET /games/1/edit
@@ -56,11 +57,13 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    @quiz = Quiz.find(params[:quiz_id])
+    @game = @quiz.games.build(game_params)
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to start_quiz_game_url(@quiz, @game), notice: 'Game was successfully created.' }
+#        format.html { redirect_to quiz_game_url(@quiz, @game), notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -88,7 +91,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
+      format.html { redirect_to quiz_games_url(@game.quiz), notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -101,6 +104,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:player_email, :game_time, :quiz_health, :player_health, :quiz_id)
+      params.require(:game).permit(:player_email)
     end
 end
