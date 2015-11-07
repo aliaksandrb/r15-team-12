@@ -6,7 +6,7 @@ article
     h3 Time Limit: #{@question.time_limit}
 hr
 
-= simple_form_for(@user_answer) do |f|
+= simple_form_for(@user_answer, remote: true, data: { type: :json }) do |f|
   = f.error_notification
 
   span Choose an answer:
