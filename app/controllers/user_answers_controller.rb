@@ -31,6 +31,7 @@ class UserAnswersController < ApplicationController
     respond_to do |format|
       if @user_answer.save
 
+        @user_answer.game.update!(game_time: Time.now.to_i)
         # PASS THROUGH VALIDATOR
 
         format.html { redirect_to @user_answer, notice: 'User answer was successfully created.' }
