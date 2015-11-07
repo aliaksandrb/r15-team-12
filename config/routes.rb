@@ -1,3 +1,25 @@
+# == Route Map
+#
+#        Prefix Verb   URI Pattern                   Controller#Action
+#     questions GET    /questions(.:format)          questions#index
+#               POST   /questions(.:format)          questions#create
+#  new_question GET    /questions/new(.:format)      questions#new
+# edit_question GET    /questions/:id/edit(.:format) questions#edit
+#      question GET    /questions/:id(.:format)      questions#show
+#               PATCH  /questions/:id(.:format)      questions#update
+#               PUT    /questions/:id(.:format)      questions#update
+#               DELETE /questions/:id(.:format)      questions#destroy
+#       quizzes GET    /quizzes(.:format)            quizzes#index
+#               POST   /quizzes(.:format)            quizzes#create
+#      new_quiz GET    /quizzes/new(.:format)        quizzes#new
+#     edit_quiz GET    /quizzes/:id/edit(.:format)   quizzes#edit
+#          quiz GET    /quizzes/:id(.:format)        quizzes#show
+#               PATCH  /quizzes/:id(.:format)        quizzes#update
+#               PUT    /quizzes/:id(.:format)        quizzes#update
+#               DELETE /quizzes/:id(.:format)        quizzes#destroy
+#          root GET    /                             quizzes#index
+#
+
 Rails.application.routes.draw do
   resources :questions
   resources :quizzes

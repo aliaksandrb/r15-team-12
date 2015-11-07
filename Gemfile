@@ -33,6 +33,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring'
+  gem 'annotate'
 end
 
 # Use Unicorn as the app server
