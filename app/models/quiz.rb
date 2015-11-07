@@ -1,5 +1,6 @@
 class Quiz < ActiveRecord::Base
   has_many :questions
+  has_many :games
   accepts_nested_attributes_for :questions, allow_destroy: true, limit: 3
 end
 

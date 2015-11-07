@@ -1,5 +1,8 @@
 class Game < ActiveRecord::Base
   validates_format_of :player_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+  belongs_to :quiz
+  has_many :questions, through: :quiz
 end
 
 # == Schema Information
