@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes/new
   def new
     @quiz = Quiz.new
-    1.times { @quiz.questions.build }
+    3.times { @quiz.questions.build }
   end
 
   # GET /quizzes/1/edit
@@ -72,7 +72,7 @@ class QuizzesController < ApplicationController
     def quiz_params
       params.require(:quiz).permit(
         :name, :fail_limit, :author_email,
-        questions_attributes: [:id, :text, :answer, :time_limit, options: []]
+        questions_attributes: [:text, :answer, :time_limit, options: []]
       )
     end
 
