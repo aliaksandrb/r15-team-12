@@ -40,8 +40,8 @@ module StepGenerator
        question_status: question_status,
        player_health: health[:player],
        quiz_health: health[:quiz],
-       steps: [['punch', 'block'],
-               ['hurt',  'kick']] }
+       steps: steps
+     }
   end
 
   def timeouted?(game, answer)
