@@ -2,7 +2,7 @@ module StepGenerator
   # Assume player is always on left
 
   def generate(game, question, answer)
-    steps = [ player: [], quiz: [] ]
+    steps = [[],[]]
 
     if timeouted?(game, answer)
       game_status = Question::TIMEOUT
@@ -15,16 +15,16 @@ module StepGenerator
       when Game::FINISHED
         case question_status
         when Question::PLAYER_WIN
-          steps[:player], steps[:quiz] = fatality_win_steps, fatality_loose_steps
+          steps = [fatality_win_steps, fatality_loose_steps]
         when Question::QUIZ_WIN
-          steps[:quiz], steps[:player] = fatality_win_steps, fatality_loose_steps
+          steps = [fatality_loose_steps, fatality_loose_steps]
         end
       when Game::ROUND
         case question_status
         when Question::PLAYER_WIN
-          steps[:player], steps[:quiz] = round_dominate_steps, round_obey_steps
+          steps = [round_dominate_steps, round_obey_steps]
         when Question::QUIZ_WIN
-          steps[:quiz], steps[:player] = round_dominate_steps, round_obey_steps
+          steps = [round_obey_steps, round_dominate_steps]
         end
       end
     end
@@ -38,20 +38,20 @@ module StepGenerator
     #          ['hurt',  'kick']] }
      { game_status: game_status,
        question_status: question_status,
-       player_health: health[:player],
-       quiz_health: health[:quiz],
+       player_health: healths[:player],
+       quiz_health: healths[:quiz],
        steps: steps
      }
   end
 
   def timeouted?(game, answer)
-    answer.time - game.game_time > question.time_limit * 1.1
+    return false
+    # TODO check timeout
+    answer.timeout - game.game_time > question.time_limit * 1.1
   end
 
   def correct?(answer, question)
-    # TODO check to_s
-    p question.options
-    question.options[(question.answer-1).to_s] == answer.value
+    question.answer == answer.value
   end
 
   def update_healths(game, question_status)
