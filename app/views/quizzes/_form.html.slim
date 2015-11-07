@@ -1,0 +1,10 @@
+= simple_form_for(@quiz) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :fail_limit
+    = f.input :author_email
+
+  .form-actions
+    = f.button :submit
