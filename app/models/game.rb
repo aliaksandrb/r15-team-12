@@ -1,9 +1,12 @@
 class Game < ActiveRecord::Base
-  validates_format_of :player_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-
   FINISHED = 'finished'.freeze
   ROUND = 'round'.freeze
   MAX_HEALTH = 100
+
+  validates_format_of :player_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  belongs_to :quiz
+  has_many :questions, through: :quiz
+  has_many :answered_questions, class_name: 'UserAnswer', dependent: :destroy
 end
 
 

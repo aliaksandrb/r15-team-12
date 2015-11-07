@@ -1,0 +1,11 @@
+= simple_form_for(@user_answer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :question
+    = f.input :value
+    = f.association :game
+    = f.input :timeout
+
+  .form-actions
+    = f.button :submit

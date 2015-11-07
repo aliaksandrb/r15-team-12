@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107135631) do
+ActiveRecord::Schema.define(version: 20151107170324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,4 +49,18 @@ ActiveRecord::Schema.define(version: 20151107135631) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "user_answers", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "value",                    null: false
+    t.integer  "game_id"
+    t.integer  "timeout",     default: 30, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "user_answers", ["game_id"], name: "index_user_answers_on_game_id", using: :btree
+  add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id", using: :btree
+
+  add_foreign_key "user_answers", "games"
+  add_foreign_key "user_answers", "questions"
 end

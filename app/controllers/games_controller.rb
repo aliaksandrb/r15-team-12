@@ -1,11 +1,36 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :start]
 
   def choose_hero
   end
 
   def start
-    session[:player_hero_id] = params[:hero_id]
+    @question = @game.questions.where.not(
+      questions: { id: [@game.answered_questions.pluck(:question_id)] }
+    ).first
+
+    if @question
+      @user_answer = @game.answered_questions.build
+      @user_answer.question = @question
+
+      session[:player_hero_id] = params[:hero_id]
+      session[:game_id] = @game.id
+      session[:question_id] = @question.id
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to the_end_game_url }
+        format.js { render js: "window.location = '#{the_end_game_url}'" }
+      end
+    end
+  end
+
+  def the_end
+    @message = 'Thanks!'
   end
 
   # GET /games
