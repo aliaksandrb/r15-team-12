@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
 
   belongs_to :quiz
   has_many :questions, through: :quiz
+  has_many :user_answers
 end
 
 # == Schema Information

@@ -1,3 +1,20 @@
 = session[:player_hero_id]
 
-strong = @question
+article
+  header
+    h1 Question: #{@question.text}
+    h3 Time Limit: #{@question.time_limit}
+  p
+    span Choose an answer:
+    ol
+      - @question.options.each do |option|
+        li = option.values.first
+hr
+= simple_form_for(@user_answer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :value
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'

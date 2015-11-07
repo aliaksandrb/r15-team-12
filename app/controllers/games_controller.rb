@@ -7,6 +7,8 @@ class GamesController < ApplicationController
   def start
     session[:player_hero_id] = params[:hero_id]
     @question = @game.questions.first
+    @user_answer = @game.user_answers.build
+    @user_answer.question = @question
   end
 
   # GET /games
