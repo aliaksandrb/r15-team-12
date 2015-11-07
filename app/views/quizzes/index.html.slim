@@ -9,6 +9,7 @@ table
       th
       th
       th
+      th
 
   tbody
     - @quizzes.each do |quiz|
@@ -16,10 +17,11 @@ table
         td = quiz.name
         td = quiz.fail_limit
         td = quiz.author_email
-        td = link_to 'Show', quiz
-        td = link_to 'Edit', edit_quiz_path(quiz)
-        td = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Play It!', new_quiz_game_path(quiz), class: 'btn btn-warning'
+        td = link_to 'Show', quiz, class: 'btn btn-default'
+        td = link_to 'Edit', edit_quiz_path(quiz), class: 'btn btn-primary'
+        td = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
 
 br
 
-= link_to 'New Quiz', new_quiz_path
+= link_to 'New Quiz', new_quiz_path, class: 'btn btn-success'

@@ -7,6 +7,16 @@ class Game < ActiveRecord::Base
   belongs_to :quiz
   has_many :questions, through: :quiz
   has_many :answered_questions, class_name: 'UserAnswer', dependent: :destroy
+
+  before_save :assign_default_values
+
+  protected
+
+  def assign_default_values
+    self.game_time = 0
+    self.quiz_health = 100
+    self.player_health = 100
+  end
 end
 
 

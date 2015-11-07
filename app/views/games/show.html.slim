@@ -16,6 +16,6 @@ p
   strong Quiz:
   = @game.quiz_id
 
-= link_to 'Edit', edit_game_path(@game)
+= link_to 'Edit', edit_quiz_game_path(@game.quiz, @game)
 '|
-= link_to 'Back', games_path
+= link_to 'Back', quiz_games_path(@game.quiz)
