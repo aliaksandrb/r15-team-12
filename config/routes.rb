@@ -21,6 +21,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :games
   resources :questions
   resources :quizzes
 
