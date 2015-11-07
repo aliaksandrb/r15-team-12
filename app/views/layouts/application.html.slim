@@ -1,0 +1,27 @@
+doctype html
+html.no-js lang="en-us"
+  head
+    meta charset="utf-8"
+    meta http-equiv="x-ua-compatible" content="ie=edge"
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    title
+      = content_for?(:title) ? yield(:title) : 'Vagrant'
+    meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Vagrant'}"
+    == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => true
+    == javascript_include_tag 'application', 'data-turbolinks-track' => true
+    == csrf_meta_tags
+  body
+    <!--[if lt IE 8]>
+      p.browserupgrade
+        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    <![endif]-->
+
+    header
+      == render 'layouts/navigation'
+    main[role="main"]
+      .container
+        == render 'layouts/messages'
+        == yield
+
+    footer
+      p &copy; Company 2015
