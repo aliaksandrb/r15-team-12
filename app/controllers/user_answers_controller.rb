@@ -1,4 +1,6 @@
 class UserAnswersController < ApplicationController
+  include StepGenerator
+
   before_action :set_user_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /user_answers
@@ -31,8 +33,10 @@ class UserAnswersController < ApplicationController
     respond_to do |format|
       if @user_answer.save
 
-        @user_answer.game.update!(game_time: Time.now.to_i)
-        # PASS THROUGH VALIDATOR
+        round_data = generate(@user_answer.game, @user_answer.question, @user_answer)
+        @user_answer.game.update!(game_time: Time.now.to_i,
+                                  player_health: round_data[:player_health],
+                                  quiz_health: round_data[:quiz_health])
 
         format.html { redirect_to @user_answer, notice: 'User answer was successfully created.' }
         format.json { render :show, status: :created, location: @user_answer }

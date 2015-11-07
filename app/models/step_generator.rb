@@ -58,7 +58,7 @@ module StepGenerator
     healths = { player: game.player_health, quiz: game.quiz_health }
 
     if question_status == Question::PLAYER_WIN
-      healths[:quiz] -= Game::MAX_HEALTH / (game.quiz.question.size - game.quiz.fail_limit) + 1
+      healths[:quiz] -= Game::MAX_HEALTH / (game.quiz.questions.size - game.quiz.fail_limit) + 1
     else
       healths[:player] -= Game::MAX_HEALTH / (game.quiz.fail_limit + 1) + 1
     end
