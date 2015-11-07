@@ -21,7 +21,14 @@
 #
 
 Rails.application.routes.draw do
-  resources :games
+  resources :games do
+    member do
+      get 'choose_hero'
+      post 'start'
+      post 'turn'
+    end
+  end
+
   resources :questions
   resources :quizzes
 

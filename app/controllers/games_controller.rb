@@ -1,6 +1,13 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
+  def choose_hero
+  end
+
+  def start
+    session[:player_hero_id] = params[:hero_id]
+  end
+
   # GET /games
   # GET /games.json
   def index
