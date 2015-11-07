@@ -1,22 +1,20 @@
 = session[:player_hero_id]
 
-article
-  header
-    h1 Question: #{@question.text}
-    h3 Time Limit: #{@question.time_limit}
-hr
+.question-to-show
+  = render partial: 'questions/question_to_show'
 
-= simple_form_for(@user_answer, remote: true, data: { type: :json }) do |f|
-  = f.error_notification
+.question-options-to-show
+  = render partial: 'questions/options_to_show'
 
-  span Choose an answer:
-  .form-inputs
-    - @question.options.each do |option|
-      - value = option.keys.first.to_s
-      .radio
-        label
-          input type='radio' name='user_answer[value]' id="question_option_radio_#{value}" value=value
-          = option.values.first
 
-  .form-actions
-    = f.button :submit, class: 'btn btn-success'
+
+
+
+
+
+
+
+
+
+
+

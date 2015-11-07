@@ -1,0 +1,18 @@
+| $('.question-to-show').html('
+= j render partial: 'questions/question_to_show'
+| ');
+
+| $('.question-options-to-show').html('
+= j render partial: 'questions/options_to_show'
+| ');
+
+| $('#new_user_answer').on('ajax:success', function(e, data, status, xhr) {
+|   $.ajax({
+|     url: document.location.pathname,
+|     method: 'GET',
+|     dataType: 'script',
+|   }).done(function(data, status, xhr) {
+|     console.log(data);
+|   });
+| });
+

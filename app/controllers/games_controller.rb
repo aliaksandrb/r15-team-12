@@ -5,13 +5,32 @@ class GamesController < ApplicationController
   end
 
   def start
-    @question = @game.questions.first
-    @user_answer = @game.user_answers.build
-    @user_answer.question = @question
+    @question = @game.questions.where.not(
+      questions: { id: [@game.answered_questions.pluck(:question_id)] }
+    ).first
 
-    session[:player_hero_id] = params[:hero_id]
-    session[:game_id] = @game.id
-    session[:question_id] = @question.id
+    if @question
+      @user_answer = @game.answered_questions.build
+      @user_answer.question = @question
+
+      session[:player_hero_id] = params[:hero_id]
+      session[:game_id] = @game.id
+      session[:question_id] = @question.id
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to the_end_game_url }
+        format.js { render js: "window.location = '#{the_end_game_url}'" }
+      end
+    end
+  end
+
+  def the_end
+    @message = 'Thanks!'
   end
 
   # GET /games

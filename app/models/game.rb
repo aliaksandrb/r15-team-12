@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
 
   belongs_to :quiz
   has_many :questions, through: :quiz
-  has_many :user_answers
+  has_many :answered_questions, class_name: 'UserAnswer', dependent: :destroy
 end
 
 # == Schema Information

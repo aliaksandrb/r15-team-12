@@ -30,6 +30,9 @@ class UserAnswersController < ApplicationController
 
     respond_to do |format|
       if @user_answer.save
+
+        # PASS THROUGH VALIDATOR
+
         format.html { redirect_to @user_answer, notice: 'User answer was successfully created.' }
         format.json { render :show, status: :created, location: @user_answer }
       else

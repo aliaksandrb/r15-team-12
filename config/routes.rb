@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'start'
       get 'start'
       post 'turn'
+      get 'the_end'
     end
   end
 
@@ -83,7 +84,9 @@ end
 #                  DELETE /user_answers/:id(.:format)      user_answers#destroy
 # choose_hero_game GET    /games/:id/choose_hero(.:format) games#choose_hero
 #       start_game POST   /games/:id/start(.:format)       games#start
+#                  GET    /games/:id/start(.:format)       games#start
 #        turn_game POST   /games/:id/turn(.:format)        games#turn
+#     the_end_game GET    /games/:id/the_end(.:format)     games#the_end
 #            games GET    /games(.:format)                 games#index
 #                  POST   /games(.:format)                 games#create
 #         new_game GET    /games/new(.:format)             games#new
