@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes/new
   def new
     @quiz = Quiz.new
-    3.times { @quiz.questions.build }
+    1.times { @quiz.questions.build }
   end
 
   # GET /quizzes/1/edit
@@ -25,7 +25,7 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   # POST /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    @quiz = Quiz.new(convert_quiz_options(quiz_params))
 
     respond_to do |format|
       if @quiz.save
@@ -42,7 +42,7 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1.json
   def update
     respond_to do |format|
-      if @quiz.update(quiz_params)
+      if @quiz.update(convert_quiz_options(quiz_params))
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
         format.json { render :show, status: :ok, location: @quiz }
       else
@@ -70,7 +70,19 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:name, :fail_limit, :author_email,
-                                   questions_attributes: [:text, :answer, :time_limit, :options])
+      params.require(:quiz).permit(
+        :name, :fail_limit, :author_email,
+        questions_attributes: [:id, :text, :answer, :time_limit, options: []]
+      )
+    end
+
+    def convert_quiz_options(params_obj)
+      options_hash = params_obj.clone()
+
+      options_hash[:questions_attributes].each do |id, question_attrs|
+        question_attrs[:options].map!.with_index(1) { |value, index| { index.to_s => value } }
+      end
+
+      options_hash
     end
 end
