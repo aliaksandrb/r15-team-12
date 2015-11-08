@@ -6,6 +6,7 @@ $(document).on 'page:change', ->
 
   heroes = {
     guy: $('.hero-guy').data('flipped', false)
+    neptune: $('.hero-neptune')
   }
 
   actions = {

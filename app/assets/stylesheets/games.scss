@@ -52,15 +52,6 @@ $hero-height: 250px;
 
 .flip { transform: scaleX(-1); }
 
-.hero-guy {
-  background-image: image-url('heroes/guy/walk.png');
-  position: relative;
-  top: $bg-height - $hero-height - 70;
-  z-index: 2;
-  width: $hero-width;
-  height: $hero-height;
-}
-
 @mixin animate-hero($image) {
   width: $hero-width;
   height: $hero-height;
@@ -71,6 +62,15 @@ $hero-height: 250px;
     from { background-position: 0px; }
       to { background-position: -1500px; }
   }
+}
+
+.hero-guy {
+  background-image: image-url('heroes/guy/walk.png');
+  position: relative;
+  top: $bg-height - $hero-height - 70;
+  z-index: 2;
+  width: $hero-width;
+  height: $hero-height;
 }
 
 .hero-guy.walk {
@@ -105,4 +105,43 @@ $hero-height: 250px;
   @include animate-hero('heroes/guy/die.png');
 }
 
+.hero-neptune {
+  background-image: image-url('heroes/neptune/walk.png');
+  position: relative;
+  top: $bg-height - $hero-height - 70;
+  z-index: 2;
+  width: $hero-width;
+  height: $hero-height;
+}
 
+.hero-neptune.walk {
+  @include animate-hero('heroes/neptune/walk.png');
+}
+
+.hero-neptune.punch {
+  @include animate-hero('heroes/neptune/punch.png');
+}
+
+.hero-neptune.win {
+  @include animate-hero('heroes/neptune/win.png');
+}
+
+.hero-neptune.low_punch {
+  @include animate-hero('heroes/neptune/low_punch.png');
+}
+
+.hero-neptune.jump {
+  @include animate-hero('heroes/neptune/jump.png');
+}
+
+.hero-neptune.hurt {
+  @include animate-hero('heroes/neptune/hurt.png');
+}
+
+.hero-neptune.fatality {
+  @include animate-hero('heroes/neptune/fatality.png');
+}
+
+.hero-neptune.die {
+  @include animate-hero('heroes/neptune/die.png');
+}
