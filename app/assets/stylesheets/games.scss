@@ -1,8 +1,11 @@
-$bg-width:  1170px;
+$bg-width: 1170px;
 $bg-height: 481px;
 
+$hero-width: 250px;
+$hero-height: 250px;
+
 .battlefield {
-  background-color: red;
+//background-color: red;
 }
 
 .question {
@@ -17,12 +20,50 @@ $bg-height: 481px;
     background-size: contain;
     position: relative;
     display: block;
-    top: 0;
-    bottom:0;
+    top: 50px;
+    bottom: 0;
     left: 0;
-    right:0;
+    right: 0;
     margin: auto;
     width: $bg-width;
     height: $bg-height;
   }
 }
+
+// heroes
+.hero-guy {
+  background-image: image-url('heroes/guy/walk.png');
+  width: $hero-width;
+  height: $hero-height;
+  position: absolute;
+  bottom: 80px;
+  z-index: 2;
+
+  animation: play .6s steps(6) infinite;
+
+  @-webkit-keyframes play {
+     from { background-position:    0px; }
+       to { background-position: -1500px; }
+  }
+
+  @-moz-keyframes play {
+     from { background-position:    0px; }
+       to { background-position: -1500px; }
+  }
+
+  @-ms-keyframes play {
+     from { background-position:    0px; }
+       to { background-position: -1500px; }
+  }
+
+  @-o-keyframes play {
+     from { background-position:    0px; }
+       to { background-position: -1500px; }
+  }
+
+  @keyframes play {
+     from { background-position:    0px; }
+       to { background-position: -1500px; }
+  }
+}
+
