@@ -1,7 +1,7 @@
 .form-inputs
   = f.input :text
   .answer-options
-    = f.input :options, as: :array_of_options, collection: question.options, label: 'Proposed Answers'
+    = f.input :options, as: :array_of_options, collection: question.options, label: 'Options'
     = link_to 'Add More', '#', class: 'add-more-options-link', data: { number: number }
 
   = f.input :answer, label: 'Right answer number'
