@@ -29,14 +29,15 @@ class UserAnswersController < ApplicationController
     @user_answer = UserAnswer.new(user_answer_params)
     @user_answer.game_id = session[:game_id]
     @user_answer.question_id = session[:question_id]
+    @user_answer.timeout = Time.now.to_i
+    Game.find(session[:game_id]).update(game_time: session[:game_time])
+
 
     respond_to do |format|
       if @user_answer.save
 
         round_data = generate(@user_answer.game, @user_answer.question, @user_answer)
-        @user_answer.game.update!(game_time: Time.now.to_i,
-                                  player_health: round_data[:player_health],
-                                  quiz_health: round_data[:quiz_health])
+        @user_answer.game.update!(round_data.slice(:player_health, :quiz_health))
 
         format.html { redirect_to @user_answer, notice: 'User answer was successfully created.' }
         format.json { render :show, status: :created, location: @user_answer }

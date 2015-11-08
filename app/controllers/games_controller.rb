@@ -16,6 +16,7 @@ class GamesController < ApplicationController
       session[:player_hero_id] = params[:hero_id]
       session[:game_id] = @game.id
       session[:question_id] = @question.id
+      session[:game_time] = Time.now.to_i
 
       respond_to do |format|
         format.html
