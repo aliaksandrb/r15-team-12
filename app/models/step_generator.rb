@@ -17,7 +17,7 @@ module StepGenerator
         when Question::PLAYER_WIN
           steps = [fatality_win_steps, fatality_loose_steps]
         when Question::QUIZ_WIN
-          steps = [fatality_loose_steps, fatality_loose_steps]
+          steps = [fatality_loose_steps, fatality_win_steps]
         end
       when Game::ROUND
         case question_status
@@ -47,7 +47,7 @@ module StepGenerator
   def timeouted?(game, answer)
     return false
     # TODO check timeout
-    answer.timeout - game.game_time > question.time_limit * 1.1
+    answer.timeout - game.game_time > answer.question.time_limit * 1.1
   end
 
   def correct?(answer, question)
