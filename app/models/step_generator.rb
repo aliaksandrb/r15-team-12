@@ -91,7 +91,7 @@ module StepGenerator
     result << [ move(pos[2][0]),      move(pos[2][1]) ]
     result << [ attack,               attack ]
     result << [ move(pos[3][0]),      move(pos[3][1]) ]
-    result << [ blocked_attack ]
+    result <<   blocked_attack
     result << [ attack,               hurt(hurts[1]) ]
 
     result.map!{ |r| r[0], r[1] = r[1], r[0] } unless left_lead
@@ -109,8 +109,8 @@ module StepGenerator
     result << [ move(pos[2][0]),      move(pos[2][1]) ]
     result << [ attack,               attack ]
     result << [ move(pos[3][0]),      move(pos[3][1]) ]
-    result << [ blocked_attack ]
-    result << [ attack,               hurt(hurts[1]) ]
+    result << [ fatality,             hurt(hurts[1]) ]
+    result << [ win,                  die ]
 
     result.map!{ |r| r[0], r[1] = r[1], r[0] } unless left_lead
     result
@@ -121,7 +121,6 @@ module StepGenerator
     right_pos = 100
 
     # TODO add randomity
-
     [[20,30],
      [30,20],
      [-20,-10],
@@ -145,9 +144,15 @@ module StepGenerator
   end
 
   def win
+    ['win', nil]
   end
 
   def die
+    ['die', nil]
+  end
+
+  def fatality
+    ['fatality', nil]
   end
 
   def sample_round_dominate_steps
