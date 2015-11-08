@@ -164,11 +164,16 @@ $(document).on 'page:change', ->
     if data_json.game_status == 'round'
       procced_steps(all_steps, callback)
     else
-      procced_steps(all_steps, callback)
-      #alert('END GAME')
-      # play fatality here
-      #callback() if callback
+      if data_json.question_status == 'quiz_win'
+        $('#result-modal .status-header').html('Lose!')
+        $('#result-modal .status-body').html('Unfortunately You have lost this game. Try again?')
+      else
+        $('#result-modal .status-header').html('Win!')
+        $('#result-modal .status-body').html('Congratulations, You have won this game!. One More?')
 
+      procced_steps(all_steps, ->
+        $('#result-modal').modal()
+      )
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)
   window.QF.actions = $.extend(window.QF.actions, actions)
