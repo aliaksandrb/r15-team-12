@@ -114,5 +114,6 @@ end
 #                       PATCH  /quizzes/:id(.:format)                            quizzes#update
 #                       PUT    /quizzes/:id(.:format)                            quizzes#update
 #                       DELETE /quizzes/:id(.:format)                            quizzes#destroy
+#                 games GET    /games(.:format)                                  games#all_games
 #                  root GET    /                                                 quizzes#index
 #
