@@ -31,6 +31,9 @@ $hero-height: 250px;
 }
 
 // heroes
+
+.flip { transform: scaleX(-1); }
+
 .hero-guy {
   background-image: image-url('heroes/guy/walk.png');
   position: absolute;
@@ -40,10 +43,10 @@ $hero-height: 250px;
   height: $hero-height;
 }
 
-.hero-guy.walk {
+@mixin animate-hero($image) {
   width: $hero-width;
   height: $hero-height;
-  background-image: image-url('heroes/guy/walk.png');
+  background-image: image-url($image);
   animation: play .6s steps(6) infinite;
 
   @keyframes play {
@@ -52,4 +55,18 @@ $hero-height: 250px;
   }
 }
 
-.flip { transform:scaleX(-1); }
+.hero-guy.walk {
+  @include animate-hero('heroes/guy/walk.png');
+}
+
+.hero-guy.punch {
+  @include animate-hero('heroes/guy/punch.png');
+}
+
+.hero-guy.win {
+  @include animate-hero('heroes/guy/win.png');
+}
+
+.hero-guy.low_punch {
+  @include animate-hero('heroes/guy/low_punch.png');
+}
