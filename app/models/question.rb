@@ -1,6 +1,8 @@
 class Question < ActiveRecord::Base
   belongs_to :quiz
 
+  validate :text, :answer, :options, :presence
+
   PLAYER_WIN = 'player_win'.freeze
   QUIZ_WIN = 'quiz_win'.freeze
   TIMEOUT = 'timeout'.freeze

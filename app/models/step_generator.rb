@@ -46,7 +46,7 @@ module StepGenerator
   end
 
   def correct?(answer, question)
-    question.answer == answer.value
+    question.answer == answer.value rescue false
   end
 
   def calc_health(game, question_status)

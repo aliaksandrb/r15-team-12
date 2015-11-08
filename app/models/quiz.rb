@@ -6,6 +6,8 @@ class Quiz < ActiveRecord::Base
 
   validates :fail_limit, inclusion: { in: 0...NUMBER_OF_QUESIONS,
                                       message: "Give a chance to the quiz, fail limit 0..#{NUMBER_OF_QUESIONS-1}"}
+  validates :name, :description, presence: true
+  validates_format_of :author_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   accepts_nested_attributes_for :questions, allow_destroy: true, limit: NUMBER_OF_QUESIONS
 end
@@ -20,4 +22,5 @@ end
 #  author_email :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  description  :string
 #
