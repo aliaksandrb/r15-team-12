@@ -54,6 +54,10 @@ $(document).on 'page:change', ->
       hero.removeClass('punch')
       hero.removeClass('win')
       hero.removeClass('low_punch')
+      hero.removeClass('jump')
+      hero.removeClass('hurt')
+      hero.removeClass('die')
+      hero.removeClass('fatality')
 
     punch: (hero) ->
       hero.addClass('punch')
@@ -64,6 +68,17 @@ $(document).on 'page:change', ->
     low_punch: (hero) ->
       hero.addClass('low_punch')
 
+    jump: (hero) ->
+      hero.addClass('jump')
+
+    hurt: (hero) ->
+      hero.addClass('hurt')
+
+    die: (hero) ->
+      hero.addClass('die')
+
+    fatality: (hero) ->
+      hero.addClass('fatality')
   }
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)

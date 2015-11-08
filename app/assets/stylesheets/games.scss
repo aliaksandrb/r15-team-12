@@ -70,3 +70,19 @@ $hero-height: 250px;
 .hero-guy.low_punch {
   @include animate-hero('heroes/guy/low_punch.png');
 }
+
+.hero-guy.jump {
+  @include animate-hero('heroes/guy/jump.png');
+}
+
+.hero-guy.hurt {
+  @include animate-hero('heroes/guy/hurt.png');
+}
+
+.hero-guy.fatality {
+  @include animate-hero('heroes/guy/fatality.png');
+}
+
+.hero-guy.die {
+  @include animate-hero('heroes/guy/die.png');
+}
