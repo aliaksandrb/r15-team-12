@@ -1,26 +1,29 @@
-h1 Listing games
+h1
+  | All games played by users
+  span = link_to 'Check quizzes to play some more games', quizzes_path, class: 'btn btn-success'
 
-table
-  thead
-    tr
-      th Responder email
-      th Game time
-      th Quiz health
-      th Player health
-      th Quiz
-      th
-      th
-      th
+- @games.each do |game|
+  .panel.panel-info.game-panel
+    .panel-heading
+      .panel-title
+        = link_to quiz_game_path(game.quiz, game) do
+          h4 Game for quiz: #{game.quiz.name.capitalize}
+        h5 = "played by " + game.player_email.downcase
+    .panel-body
+      p
+        strong Game Time:
+        = game.game_time
+      p
+        strong Computer Health:
+        = game.quiz_health
+      p
+        strong Player Health:
+        = game.player_health
 
-  tbody
-    - @games.each do |game|
-      tr
-        td = game.player_email
-        td = game.game_time
-        td = game.quiz_health
-        td = game.player_health
-        td = game.quiz_id
-        td = link_to 'Show', quiz_game_path(game.quiz, game)
-        td = link_to 'Destroy', quiz_game_path(game.quiz, game), data: {:confirm => 'Are you sure?'}, :method => :delete
-
+      ul.game-links.pull-right.list-inline
+        li = link_to 'Play with same Quiz', new_quiz_game_path(game.quiz), class: 'btn btn-success'
+        li = link_to 'Destroy', quiz_game_path(game.quiz, game), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+    .panel-footer
+      .game-creation-date
+        = 'Was played: ' + time_ago_in_words(game.created_at) + ' ago'
 br

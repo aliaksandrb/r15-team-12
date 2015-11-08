@@ -1,21 +1,25 @@
-p#notice = notice
+.panel.panel-info.game-panel
+  .panel-heading
+    .panel-title
+      = link_to quiz_game_path(@game.quiz, @game) do
+        h4 Game for quiz: #{@game.quiz.name.capitalize}
+      h5 = "played by " + @game.player_email.downcase
+  .panel-body
+    p
+      strong Game Time:
+      = @game.game_time
+    p
+      strong Computer Health:
+      = @game.quiz_health
+    p
+      strong Player Health:
+      = @game.player_health
 
-p
-  strong Responder email:
-  = @game.player_email
-p
-  strong Game time:
-  = @game.game_time
-p
-  strong Quiz health:
-  = @game.quiz_health
-p
-  strong Player health:
-  = @game.player_health
-p
-  strong Quiz:
-  = @game.quiz_id
+    ul.game-links.pull-right.list-inline
+      li = link_to 'Play with same Quiz', new_quiz_game_path(@game.quiz), class: 'btn btn-success'
+      li = link_to 'Destroy', quiz_game_path(@game.quiz, @game), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+  .panel-footer
+    .game-creation-date
+      = 'Was played: ' + time_ago_in_words(@game.created_at) + ' ago'
 
-= link_to 'Edit', edit_quiz_game_path(@game.quiz, @game)
-'|
-= link_to 'Back', quiz_games_path(@game.quiz)
+= link_to 'Back', games_path, class: 'btn btn-default'

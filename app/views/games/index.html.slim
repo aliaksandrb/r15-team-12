@@ -1,5 +1,5 @@
 h1
-  | Games played by users
+  | Games played by users for this quiz
   span = link_to 'Check quizzes to play some more games', quizzes_path, class: 'btn btn-success'
 
 - @games.each do |game|
@@ -7,7 +7,7 @@ h1
     .panel-heading
       .panel-title
         = link_to quiz_game_path(game.quiz, game) do
-          h4 = game.quiz.name.capitalize
+          h4 Game for quiz: #{game.quiz.name.capitalize}
         h5 = "played by " + game.player_email.downcase
     .panel-body
       p
