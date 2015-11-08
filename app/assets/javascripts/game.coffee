@@ -1,93 +1,67 @@
 $(document).on 'page:change', ->
   window.QF = window.QF || {}
 
-  $stage = $('.stage')
-  $defaultStageWidth = $stage.width()
+  # guy - player
+  # neptune - computer
 
   heroes = {
     guy: $('.hero-guy').data('flipped', false)
     neptune: $('.hero-neptune')
   }
 
-  actions = {
-    walk: (hero)->
-      hero.addClass('walk')
+  stage = $('.stage')
+  defaultStageWidth = stage.width()
+  heroWidth = 250
 
-    walkRight: (hero, value, way = 0) ->
-      moving = setTimeout( ->
-       hero.addClass('walk').css({ marginLeft: '+=10px' })
-       way += 10
-       if way < value
-         actions.walkRight(hero, value, way)
-       else
-         actions.stop(hero)
-      , 100)
+  localStorage.removeItem('distanceBettweenHeroes')
 
-    walkLeft: (hero, direction = 'left') ->
-      if direction == 'left'
-        hero.addClass('walk').css({ marginLeft: '-=10px' })
-      else
-        hero.addClass('walk').css({ marginRight: '+=10px' })
+  current_distance = ->
+    if localStorage.getItem('distanceBettweenHeroes') && !isNaN(localStorage.getItem('distanceBettweenHeroes'))
+      Number(localStorage.getItem('distanceBettweenHeroes'))
+    else
+      defaultStageWidth - heroWidth * 2
 
-    walkFromLeftToCenter: (hero, way = 0) ->
-      moving = setTimeout( ->
-        actions.walkRight(hero)
-        way += 10
-        if way < ($defaultStageWidth / 2 - hero.width())
-          actions.walkFromLeftToCenter(hero, way)
-        else
-          actions.stop(hero)
-      , 100)
+  update_distance = (value) ->
+    localStorage.setItem('distanceBettweenHeroes', current_distance() + value)
 
-    walkFromCenterToLeft: (hero, way = 0) ->
-      actions.flip(hero)
+  update_distance((defaultStageWidth - heroWidth * 2) / 2)
 
-      moving = setTimeout( ->
-        actions.walkLeft(hero)
-        way += 10
-        if way < ($defaultStageWidth / 2 - hero.width())
-          actions.walkFromCenterToLeft(hero, way)
-        else
-          actions.stop(hero)
-          actions.unflip(hero)
-      , 100)
+  styles = {
+    walk: (hero) ->
+      hero.addClass('walk') unless hero.hasClass('walk')
 
-    walkFromRightToCenter: (hero, way = 0) ->
-      moving = setTimeout( ->
-        actions.walkLeft(hero, 'right')
-        way += 10
+    punch: (hero) ->
+      hero.addClass('punch') unless hero.hasClass('punch')
 
-        if way < ($defaultStageWidth / 2 - hero.width())
-          actions.walkFromRightToCenter(hero, way)
-        else
-          actions.stop(hero)
-      , 100)
+    win: (hero) ->
+      hero.addClass('win') unless hero.hasClass('win')
 
-    walkFromCenterToRight: (hero, way = 0) ->
-      actions.unflip(hero)
+    low_punch: (hero) ->
+      hero.addClass('low_punch') unless hero.hasClass('low_punch')
 
-      moving = setTimeout( ->
-        actions.walkRightByLeftPlayer(hero)
-        way += 10
-        if way < ($defaultStageWidth / 2 - hero.width())
-          actions.walkFromCenterToRight(hero, way)
-        else
-          actions.stop(hero)
-          actions.flip(hero)
-      , 100)
+    jump: (hero) ->
+      hero.addClass('jump') unless hero.hasClass('jump')
 
-    walkRightByLeftPlayer: (hero) ->
-      hero.addClass('walk').css({ marginRight: '-=10px' })
+    hurt: (hero) ->
+      hero.addClass('hurt') unless hero.hasClass('hurt')
+
+    die: (hero) ->
+      hero.addClass('die') unless hero.hasClass('die')
+
+    fatality: (hero) ->
+      hero.addClass('fatality') unless hero.hasClass('fatality')
 
     flip: (hero) ->
-      hero.addClass('flip')
+      hero.addClass('flip') unless hero.hasClass('flip')
       hero.data('flipped', true)
 
     unflip: (hero) ->
-      hero.removeClass('flip')
+      hero.removeClass('flip') if hero.hasClass('flip')
       hero.data('flipped', false)
+  }
 
-    stop: (hero) ->
+  stop = (hero, timeout = 300) ->
+    setTimeout( ->
       hero.removeClass('walk')
       hero.removeClass('punch')
       hero.removeClass('win')
@@ -96,73 +70,99 @@ $(document).on 'page:change', ->
       hero.removeClass('hurt')
       hero.removeClass('die')
       hero.removeClass('fatality')
+    , timeout)
 
-    punch: (hero) ->
-      hero.addClass('punch')
+  move = (hero, value_in_per, dir = 'left') ->
+    diff = (defaultStageWidth / 100) * value_in_per
 
-    win: (hero) ->
-      hero.addClass('win')
+    if dir == 'left'
+      hero.css({ marginLeft: '+=' + diff + 'px' })
+    else
+      hero.css({ marginRight: '+=' + diff + 'px' })
 
-    low_punch: (hero) ->
-      hero.addClass('low_punch')
+    update_distance(0 - diff)
 
-    jump: (hero) ->
-      hero.addClass('jump')
+  update_health = (value, dir = 'left') ->
+    bar = $('.' + dir + '-stage-health .progress-bar')
+    bar.attr('aria-valuenow', value).css('width', value + '%');
 
-    hurt: (hero) ->
-      hero.addClass('hurt')
+  actions = {
+    walk: (hero, value, dir = 'left') ->
+      styles.walk(hero)
+      move(hero, value, dir)
+      stop(hero)
 
-    die: (hero) ->
-      hero.addClass('die')
+    punch: (hero, value = 0, dir = 'left') ->
+      styles.punch(hero)
+      stop(hero)
 
-    fatality: (hero) ->
-      hero.addClass('fatality')
-  }
+    win: (hero, value = 0, dir = 'left') ->
+      styles.win(hero)
+      stop(hero, 5000)
 
-  animate_hero_step = (action, value, hero) ->
-    actions.stop(hero)
-    action(hero, value || 0)
+    low_punch: (hero, value = 0, dir = 'left') ->
+      styles.low_punch(hero)
+      stop(hero)
 
-  procced_hero_step = (step, direction) ->
+    jump: (hero, value, dir = 'left') ->
+      styles.jump(hero)
+      move(hero, value, dir)
+      stop(hero)
+
+    hurt: (hero, value, dir = 'left') ->
+      styles.hurt(hero)
+      update_health(value, dir)
+      stop(hero)
+
+    die: (hero, value = 0, dir = 'left') ->
+      styles.die(hero)
+      stop(hero)
+
+    fatality: (hero, value = 0, dir = 'left') ->
+      styles.fatality(hero)
+      stop(hero, 1000)
+
+  steps_manager = (hero_step, direction) ->
     if direction == 'left'
       hero = heroes.guy
     else
       hero = heroes.neptune
 
-    action = step[0]
-    switch action
-      when 'walk'
-        animate_hero_step(actions['walkRight'], step[1], hero)
-      else
-        animate_hero_step(actions[action], step[1], hero)
+    action = hero_step[0]
+    value = hero_step[1]
 
-  steps_manager = (hero_steps, direction, callback) ->
-    if direction == 'left'
-      hero = heroes.guy
-    else
-      hero = heroes.neptune
+    actions[action](hero, value, direction)
 
-    if hero_steps.length > 0
-      setTimeout( ->
-        procced_hero_step(hero_steps.shift(), direction)
-        steps_manager(hero_steps, direction, callback)
-      , 300)
-    else
-      actions.stop(hero)
-      callback() if callback
+ # synhronize steps to show
+  procced_steps = (all_steps, callback) ->
+    if all_steps.length > 0
+       setTimeout( ->
+         step = all_steps.shift()
 
+         steps_manager(step[0], 'left')
+         steps_manager(step[1], 'right')
+
+         procced_steps(all_steps, callback)
+       , 500)
+     else
+       stop(heroes.guy)
+       stop(heroes.neptune)
+       callback() if callback
+
+  # response parser
   parse_answer_response = (data_json, callback) ->
     if data_json.game_status == 'round'
-      hero_left_steps = data_json.steps[0]
-      hero_right_steps = data_json.steps[1]
+      all_steps = data_json.steps
 
-      steps_manager(hero_left_steps, 'left')
-      steps_manager(hero_right_steps, 'right', callback)
+      procced_steps(all_steps, callback)
     else
-      console.log('die')
+      alert('END GAME')
+      # play fatality here
       callback() if callback
+
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)
   window.QF.actions = $.extend(window.QF.actions, actions)
+  window.QF.styles = $.extend(window.QF.styles, styles)
   window.QF.parse_answer_response = parse_answer_response
 
