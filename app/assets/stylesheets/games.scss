@@ -27,6 +27,24 @@ $hero-height: 250px;
     margin: auto;
     width: $bg-width;
     height: $bg-height;
+
+    .left-stage-health {
+      width: 40%;
+      height: 30px;
+      position: relative;
+      top: 10px;
+      left: 10px;
+      float: left;
+    }
+
+    .right-stage-health {
+      width: 40%;
+      height: 30px;
+      position: relative;
+      top: 10px;
+      right: 10px;
+      float: right;
+    }
   }
 }
 
@@ -36,8 +54,8 @@ $hero-height: 250px;
 
 .hero-guy {
   background-image: image-url('heroes/guy/walk.png');
-  position: absolute;
-  bottom: 80px;
+  position: relative;
+  top: $bg-height - $hero-height - 70;
   z-index: 2;
   width: $hero-width;
   height: $hero-height;
@@ -86,3 +104,5 @@ $hero-height: 250px;
 .hero-guy.die {
   @include animate-hero('heroes/guy/die.png');
 }
+
+
