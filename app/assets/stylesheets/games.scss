@@ -51,3 +51,5 @@ $hero-height: 250px;
       to { background-position: -1500px; }
   }
 }
+
+.flip { transform:scaleX(-1); }
