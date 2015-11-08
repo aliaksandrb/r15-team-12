@@ -72,7 +72,7 @@ class QuizzesController < ApplicationController
     def quiz_params
       params.require(:quiz).permit(
         :name, :fail_limit, :author_email,
-        questions_attributes: [:text, :answer, :time_limit, options: []]
+        questions_attributes: [:id, :text, :answer, :time_limit, options: []]
       )
     end
 
