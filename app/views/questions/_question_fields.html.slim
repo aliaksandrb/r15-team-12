@@ -4,5 +4,6 @@
     = f.input :options, as: :array_of_options, collection: question.options, label: 'Options'
     = link_to 'Add More', '#', class: 'add-more-options-link', data: { number: number }
 
-  = f.input :answer, label: 'Right answer number'
+  = f.label(:answer, 'Correct option:', {style: 'color:black;'})
+  = f.collection_radio_buttons(:answer, question.options.size.times.inject([]){|base, i| base << [i+1, "#{i+1}"] } ,:first, :last ) { |b| b.label(style: 'color:black; margin: 5px') + b.radio_button }
   = f.input :time_limit
