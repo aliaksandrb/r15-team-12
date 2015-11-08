@@ -37,7 +37,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @quiz = Quiz.find(params[:quiz_id])
+    @games = @quiz.games
   end
 
   def all_games

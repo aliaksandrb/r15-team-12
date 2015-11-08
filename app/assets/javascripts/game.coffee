@@ -121,6 +121,7 @@ $(document).on 'page:change', ->
     fatality: (hero, value = 0, dir = 'left') ->
       styles.fatality(hero)
       stop(hero, 1000)
+  }
 
   steps_manager = (hero_step, direction) ->
     if direction == 'left'
