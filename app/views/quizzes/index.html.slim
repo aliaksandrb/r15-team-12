@@ -9,6 +9,7 @@ h1
         = link_to quiz do
           h4 = quiz.name.capitalize
         h5 = "by " + quiz.author_email.downcase
+        h6 = link_to 'all games with this quiz', quiz_games_path(quiz)
     .panel-body
       p = quiz.description
       ul.quiz-links.pull-right.list-inline
