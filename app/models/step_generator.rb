@@ -3,8 +3,8 @@ module StepGenerator
   # Assume player is always on left
 
   def generate(game, question, answer)
-    healths = { player: { start: game.player_health, final: 0 },
-               quiz:   { start: game.quiz_health,   final: 0}}
+    healths = { player: { start: game.player_health, final: game.player_health },
+                quiz:   { start: game.quiz_health,   final: game.quiz_health}}
 
     $rand = Random.new(Time.now.to_i)
     steps = []
@@ -54,8 +54,8 @@ module StepGenerator
   end
 
   def calc_health(game, question_status)
-    healths = { player: { start: game.player_health, final: 0 },
-               quiz:   { start: game.quiz_health,   final: 0}}
+    healths = { player: { start: game.player_health, final: game.player_health },
+                quiz:   { start: game.quiz_health,   final: game.quiz_health}}
 
     if question_status == Question::PLAYER_WIN
       healths[:quiz][:final] = healths[:quiz][:start] - (Game::MAX_HEALTH / (game.quiz.questions.size - game.quiz.fail_limit) + 1)
