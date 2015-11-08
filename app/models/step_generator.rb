@@ -3,38 +3,34 @@ module StepGenerator
   # Assume player is always on left
 
   def generate(game, question, answer)
-    healths = { player: { start: game.player_health, final: game.player_health },
-                quiz:   { start: game.quiz_health,   final: game.quiz_health}}
+    begin
+      healths = { player: { start: game.player_health, final: game.player_health },
+                  quiz:   { start: game.quiz_health,   final: game.quiz_health}}
 
-    $rand = Random.new(Time.now.to_i)
-    steps = []
-    # [[[left_action, value],[right_action, value]],
-    #  [[left_action, value],[right_action, value]],
-    #  [[left_action, value],[right_action, value]]]
+      $rand = Random.new(Time.now.to_i)
+      steps = []
+      # [[[left_action, value],[right_action, value]],
+      #  [[left_action, value],[right_action, value]],
+      #  [[left_action, value],[right_action, value]]]
 
-    if timeouted?(game, answer)
-      game_status = Question::TIMEOUT
-    else
-      question_status = correct?(answer, question) ? Question::PLAYER_WIN : Question::QUIZ_WIN
-      healths = calc_health(game, question_status)
-      game_status = finished?(healths) ? Game::FINISHED : Game::ROUND
+      if timeouted?(game, answer)
+        game_status = Question::TIMEOUT
+      else
+        question_status = correct?(answer, question) ? Question::PLAYER_WIN : Question::QUIZ_WIN
+        healths = calc_health(game, question_status)
+        game_status = finished?(healths) ? Game::FINISHED : Game::ROUND
 
-      steps = case [game_status, question_status]
-              when [Game::FINISHED, Question::PLAYER_WIN]   then fatality_based_win healths, :left
-              when [Game::FINISHED, Question::QUIZ_WIN]     then fatality_based_win healths
-              when [Game::ROUND,    Question::PLAYER_WIN]   then dominate_fight healths, :left
-              when [Game::ROUND,    Question::QUIZ_WIN]     then dominate_fight healths
-              end
+        steps = case [game_status, question_status]
+                when [Game::FINISHED, Question::PLAYER_WIN]   then fatality_based_win healths, :left
+                when [Game::FINISHED, Question::QUIZ_WIN]     then fatality_based_win healths
+                when [Game::ROUND,    Question::PLAYER_WIN]   then dominate_fight healths, :left
+                when [Game::ROUND,    Question::QUIZ_WIN]     then dominate_fight healths
+                end
+      end
+    rescue
+      steps = sample_round(:left)
     end
-    # Format
-    # { game_status: Status::Game::ROUND,
-    #  question_status: Status::Question::QUIZ_WIN,
-    #  player_health: 50,
-    #  quiz_health: 75,
-    #  steps: [[[left_action, value],[right_action, value]],
-    #          [[left_action, value],[right_action, value]],
-    #          [[left_action, value],[right_action, value]]] }
-    #
+
      { game_status: game_status,
        question_status: question_status,
        player_health: healths[:player][:final],
