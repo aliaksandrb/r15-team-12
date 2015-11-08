@@ -1,28 +1,22 @@
-h1 Listing quizzes
+h1
+  | Quizzes created by users
+  span = link_to 'New One', new_quiz_path, class: 'btn btn-success'
 
-table
-  thead
-    tr
-      th Name
-      th Fail limit
-      th Author email
-      th
-      th
-      th
-      th
-
-  tbody
-    - @quizzes.each do |quiz|
-      tr
-        td = quiz.name
-        td = quiz.fail_limit
-        td = quiz.description
-        td = quiz.author_email
-        td = link_to 'Play It!', new_quiz_game_path(quiz), class: 'btn btn-warning'
-        td = link_to 'Show', quiz, class: 'btn btn-default'
-        td = link_to 'Edit', edit_quiz_path(quiz), class: 'btn btn-primary'
-        td = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-
+- @quizzes.each do |quiz|
+  .panel.panel-warning.quiz-panel
+    .panel-heading
+      .panel-title
+        h4 = link_to quiz.name.capitalize, quiz
+        h5 = "by " + quiz.author_email.downcase
+    .panel-body
+      p = quiz.description
+      ul.quiz-links.pull-right.list-inline
+        li = link_to 'Play It!', new_quiz_game_path(quiz), class: 'btn btn-warning'
+        li = link_to 'Edit', edit_quiz_path(quiz), class: 'btn btn-primary'
+        li = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+    .panel-footer
+      .quiz-creation-date
+        = 'Was created: ' + time_ago_in_words(quiz.created_at)
 br
 
 = link_to 'New Quiz', new_quiz_path, class: 'btn btn-success'

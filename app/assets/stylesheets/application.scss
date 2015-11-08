@@ -37,3 +37,15 @@ main {
 a {
   color: $color !important;
 }
+
+$grey: #333;
+
+.quiz-panel, .panel-body {
+  color: #333 !important;
+}
+
+.quiz-panel {
+  .panel-title {
+      a { color: #8a6d3b !important; }
+  }
+}
