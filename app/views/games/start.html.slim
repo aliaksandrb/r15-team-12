@@ -1,8 +1,22 @@
 .battlefield
   = render partial: 'battlefield'
 
-.question
-  .question-to-show
-    = render partial: 'questions/question_to_show'
-  .question-options-to-show
-    = render partial: 'questions/options_to_show'
+.modal.fade#question-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        .question-to-show
+          = render partial: 'questions/question_to_show'
+
+      .modal-body
+        .question
+          .question-options-to-show
+            = render partial: 'questions/options_to_show'
+      .modal-footer
+        .form-actions
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+          button.btn.btn-success#sumbit-answer-btn type="button" Submit!
+
+

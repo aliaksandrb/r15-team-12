@@ -6,8 +6,8 @@ $bg-height: 481px;
 }
 
 .question {
-  width: $bg-width;
-  height: $bg-height;
+//  width: $bg-width;
+//  height: $bg-height;
 }
 
 .stage {
@@ -15,7 +15,7 @@ $bg-height: 481px;
     z-index: 1;
     background-image: image-url('backgrounds/bg_1.gif');
     background-size: contain;
-    position: absolute;
+    position: relative;
     display: block;
     top: 0;
     bottom:0;
