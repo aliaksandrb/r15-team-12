@@ -1,4 +1,23 @@
 $bg-color: #000;
+$color: #fff;
+
+a {
+  color: $color !important;
+}
+
+a.btn.btn-default, .panel-body .form-group {
+  color: #333 !important;
+}
+
+.add-more-options-link {
+  color: #333 !important;
+  text-decoration: none;
+
+  &:hover {
+    background: none;
+    text-decoration: underline;
+  }
+}
 
 section#header-menu {
   .jumbotron {

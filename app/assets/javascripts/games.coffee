@@ -1,5 +1,5 @@
 $(document).on 'ready page:load', ->
-  $('#question-modal').modal({})
+  $('#question-modal').modal()
 
   $('#sumbit-answer-btn').on('click', (e) ->
     e.preventDefault()

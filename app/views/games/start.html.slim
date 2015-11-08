@@ -19,4 +19,19 @@
           button.btn.btn-default type="button" data-dismiss="modal" Close
           button.btn.btn-success#sumbit-answer-btn type="button" Submit!
 
+.modal.fade#result-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        .status-header
 
+      .modal-body
+        .status
+          .status-body
+
+      .modal-footer
+        .form-actions
+          button.btn.btn-default type="button" data-dismiss="modal" Close
+          = link_to 'Home Page', root_path, class: 'btn btn-success'
