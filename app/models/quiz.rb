@@ -1,8 +1,13 @@
 class Quiz < ActiveRecord::Base
+  NUMBER_OF_QUESIONS = 5
+
   has_many :questions
   has_many :games
 
-  accepts_nested_attributes_for :questions, allow_destroy: true, limit: 5
+  validates :fail_limit, inclusion: { in: 0...NUMBER_OF_QUESIONS,
+                                      message: "Give a chance to the quiz, fail limit 0..#{NUMBER_OF_QUESIONS-1}"}
+
+  accepts_nested_attributes_for :questions, allow_destroy: true, limit: NUMBER_OF_QUESIONS
 end
 
 # == Schema Information
