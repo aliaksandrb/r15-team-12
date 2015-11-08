@@ -21,7 +21,6 @@ table
         td = game.player_health
         td = game.quiz_id
         td = link_to 'Show', quiz_game_path(game.quiz, game)
-        td = link_to 'Edit', edit_quiz_game_path(game.quiz, game)
         td = link_to 'Destroy', quiz_game_path(game.quiz, game), data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
