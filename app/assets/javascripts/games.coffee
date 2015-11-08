@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'ready page:load', ->
+  $('#question-modal').modal({})
+
+  $('#sumbit-answer-btn').on('click', (e) ->
+    e.preventDefault()
+
+    $('#new_user_answer').submit()
+  )
+
