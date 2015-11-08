@@ -7,3 +7,4 @@ $(document).on 'ready page:load', ->
     $('#new_user_answer').submit()
   )
 
+
