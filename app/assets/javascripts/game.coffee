@@ -51,6 +51,19 @@ $(document).on 'page:change', ->
 
     stop: (hero) ->
       hero.removeClass('walk')
+      hero.removeClass('punch')
+      hero.removeClass('win')
+      hero.removeClass('low_punch')
+
+    punch: (hero) ->
+      hero.addClass('punch')
+
+    win: (hero) ->
+      hero.addClass('win')
+
+    low_punch: (hero) ->
+      hero.addClass('low_punch')
+
   }
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)
