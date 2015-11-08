@@ -33,37 +33,21 @@ $hero-height: 250px;
 // heroes
 .hero-guy {
   background-image: image-url('heroes/guy/walk.png');
-  width: $hero-width;
-  height: $hero-height;
   position: absolute;
   bottom: 80px;
   z-index: 2;
-
-  animation: play .6s steps(6) infinite;
-
-  @-webkit-keyframes play {
-     from { background-position:    0px; }
-       to { background-position: -1500px; }
-  }
-
-  @-moz-keyframes play {
-     from { background-position:    0px; }
-       to { background-position: -1500px; }
-  }
-
-  @-ms-keyframes play {
-     from { background-position:    0px; }
-       to { background-position: -1500px; }
-  }
-
-  @-o-keyframes play {
-     from { background-position:    0px; }
-       to { background-position: -1500px; }
-  }
-
-  @keyframes play {
-     from { background-position:    0px; }
-       to { background-position: -1500px; }
-  }
+  width: $hero-width;
+  height: $hero-height;
 }
 
+.hero-guy.walk {
+  width: $hero-width;
+  height: $hero-height;
+  background-image: image-url('heroes/guy/walk.png');
+  animation: play .6s steps(6) infinite;
+
+  @keyframes play {
+    from { background-position: 0px; }
+      to { background-position: -1500px; }
+  }
+}
