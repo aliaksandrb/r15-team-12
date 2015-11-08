@@ -1,20 +1,22 @@
-p#notice = notice
+.panel.panel-warning.quiz-panel
+  .panel-heading
+    .panel-title
+      h4 = @quiz.name.capitalize
+      h5 = "by " + @quiz.author_email.downcase
+  .panel-body
+    p
+      strong Description:
+      = @quiz.description
+    p
+      strong Fail limit:
+      = @quiz.fail_limit
 
-p
-  strong Name:
-  = @quiz.name
-p
-  strong Description:
-  = @quiz.description
-p
-  strong Fail limit:
-  = @quiz.fail_limit
-p
-  strong Author email:
-  = @quiz.author_email
+    ul.quiz-links.pull-right.list-inline
+      li = link_to 'Play It!', new_quiz_game_path(@quiz), class: 'btn btn-warning'
+      li = link_to 'Edit', edit_quiz_path(@quiz), class: 'btn btn-primary'
+      li = link_to 'Destroy', @quiz, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+  .panel-footer
+    .quiz-creation-date
+      = 'Was created: ' + time_ago_in_words(@quiz.created_at) + ' ago'
 
-= link_to 'Edit', edit_quiz_path(@quiz), class: 'btn btn-primary'
-'|
-= link_to 'Back', quizzes_path, class: 'btn btn-default'
-'|
-= link_to 'Try and Play It!', new_quiz_game_path(@quiz), class: 'btn btn-warning'
+== link_to 'Back to Quizzes list', quizzes_path, class: 'btn btn-default'

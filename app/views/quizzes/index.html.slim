@@ -6,7 +6,8 @@ h1
   .panel.panel-warning.quiz-panel
     .panel-heading
       .panel-title
-        h4 = link_to quiz.name.capitalize, quiz
+        = link_to quiz do
+          h4 = quiz.name.capitalize
         h5 = "by " + quiz.author_email.downcase
     .panel-body
       p = quiz.description
@@ -16,7 +17,7 @@ h1
         li = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
     .panel-footer
       .quiz-creation-date
-        = 'Was created: ' + time_ago_in_words(quiz.created_at)
+        = 'Was created: ' + time_ago_in_words(quiz.created_at) + ' ago'
 br
 
 = link_to 'New Quiz', new_quiz_path, class: 'btn btn-success'
