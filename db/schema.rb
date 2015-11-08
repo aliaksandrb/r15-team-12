@@ -42,12 +42,12 @@ ActiveRecord::Schema.define(version: 20151108190743) do
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
   create_table "quizzes", force: :cascade do |t|
-    t.string   "name",                     null: false
-    t.integer  "fail_limit",   default: 0, null: false
-    t.string   "author_email",             null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "description"
+    t.string   "name",                      null: false
+    t.integer  "fail_limit",   default: 0,  null: false
+    t.string   "author_email",              null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "description",  default: ""
   end
 
   create_table "user_answers", force: :cascade do |t|

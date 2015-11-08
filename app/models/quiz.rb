@@ -22,5 +22,5 @@ end
 #  author_email :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  description  :string
+#  description  :string           default("")
 #

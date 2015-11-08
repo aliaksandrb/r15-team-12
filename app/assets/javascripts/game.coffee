@@ -73,7 +73,7 @@ $(document).on 'page:change', ->
     , timeout)
 
   move = (hero, value_in_per, dir = 'left') ->
-    diff = (defaultStageWidth / 100) * value_in_per
+    diff = ((defaultStageWidth - 500 + 150) / 100) * value_in_per
 
     if dir == 'left'
       hero.css({ marginLeft: '+=' + diff + 'px' })

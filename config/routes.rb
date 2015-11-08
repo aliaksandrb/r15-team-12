@@ -79,6 +79,7 @@ end
 # == Route Map
 #
 #                Prefix Verb   URI Pattern                                       Controller#Action
+#         welcome_index GET    /welcome/index(.:format)                          welcome#index
 #          user_answers GET    /user_answers(.:format)                           user_answers#index
 #                       POST   /user_answers(.:format)                           user_answers#create
 #       new_user_answer GET    /user_answers/new(.:format)                       user_answers#new
@@ -117,5 +118,5 @@ end
 #                       PUT    /quizzes/:id(.:format)                            quizzes#update
 #                       DELETE /quizzes/:id(.:format)                            quizzes#destroy
 #                 games GET    /games(.:format)                                  games#all_games
-#                  root GET    /                                                 quizzes#index
+#                  root GET    /                                                 welcome#index
 #
