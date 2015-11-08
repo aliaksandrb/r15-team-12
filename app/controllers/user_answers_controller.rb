@@ -32,7 +32,6 @@ class UserAnswersController < ApplicationController
     @user_answer.timeout = Time.now.to_i
     Game.find(session[:game_id]).update(game_time: session[:game_time])
 
-
     respond_to do |format|
       if @user_answer.save
 
@@ -40,7 +39,7 @@ class UserAnswersController < ApplicationController
         @user_answer.game.update!(round_data.slice(:player_health, :quiz_health))
 
         format.html { redirect_to @user_answer, notice: 'User answer was successfully created.' }
-        format.json { render :show, status: :created, location: @user_answer }
+        format.json { render json: round_data, status: :ok, location: @user_answer }
       else
         format.html { render :new }
         format.json { render json: @user_answer.errors, status: :unprocessable_entity }

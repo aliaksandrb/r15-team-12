@@ -7,12 +7,14 @@
 | ');
 
 | $('#new_user_answer').on('ajax:success', function(e, data, status, xhr) {
-|   $.ajax({
-|     url: document.location.pathname,
-|     method: 'GET',
-|     dataType: 'script',
-|   }).done(function(data, status, xhr) {
-|     console.log(data);
+|   QF.parse_answer_response(data, function() {
+|
+|     $.ajax({
+|       url: document.location.pathname,
+|       method: 'GET',
+|       dataType: 'script',
+|     }).done(function(data, status, xhr) {
+|       console.log(data);
+|     });
 |   });
 | });
-
