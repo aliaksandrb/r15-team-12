@@ -23,8 +23,11 @@ $(document).on 'page:change', ->
          actions.stop(hero)
       , 100)
 
-    walkLeft: (hero) ->
-      hero.addClass('walk').css({ marginLeft: '-=10px' })
+    walkLeft: (hero, direction = 'left') ->
+      if direction == 'left'
+        hero.addClass('walk').css({ marginLeft: '-=10px' })
+      else
+        hero.addClass('walk').css({ marginRight: '+=10px' })
 
     walkFromLeftToCenter: (hero, way = 0) ->
       moving = setTimeout( ->
@@ -48,6 +51,33 @@ $(document).on 'page:change', ->
           actions.stop(hero)
           actions.unflip(hero)
       , 100)
+
+    walkFromRightToCenter: (hero, way = 0) ->
+      moving = setTimeout( ->
+        actions.walkLeft(hero, 'right')
+        way += 10
+
+        if way < ($defaultStageWidth / 2 - hero.width())
+          actions.walkFromRightToCenter(hero, way)
+        else
+          actions.stop(hero)
+      , 100)
+
+    walkFromCenterToRight: (hero, way = 0) ->
+      actions.unflip(hero)
+
+      moving = setTimeout( ->
+        actions.walkRightByLeftPlayer(hero)
+        way += 10
+        if way < ($defaultStageWidth / 2 - hero.width())
+          actions.walkFromCenterToRight(hero, way)
+        else
+          actions.stop(hero)
+          actions.flip(hero)
+      , 100)
+
+    walkRightByLeftPlayer: (hero) ->
+      hero.addClass('walk').css({ marginRight: '-=10px' })
 
     flip: (hero) ->
       hero.addClass('flip')
@@ -94,12 +124,10 @@ $(document).on 'page:change', ->
     action(hero, value || 0)
 
   procced_hero_step = (step, direction) ->
-    console.log 'procced_hero_step'
-
     if direction == 'left'
       hero = heroes.guy
     else
-      hero = 'computer'
+      hero = heroes.neptune
 
     action = step[0]
     switch action
@@ -112,7 +140,7 @@ $(document).on 'page:change', ->
     if direction == 'left'
       hero = heroes.guy
     else
-      hero = 'computer'
+      hero = heroes.neptune
 
     if hero_steps.length > 0
       setTimeout( ->
@@ -121,19 +149,18 @@ $(document).on 'page:change', ->
       , 300)
     else
       actions.stop(hero)
-      callback()
+      callback() if callback
 
   parse_answer_response = (data_json, callback) ->
-    console.log data_json
-
     if data_json.game_status == 'round'
       hero_left_steps = data_json.steps[0]
       hero_right_steps = data_json.steps[1]
 
-      steps_manager(hero_left_steps, 'left', callback)
+      steps_manager(hero_left_steps, 'left')
+      steps_manager(hero_right_steps, 'right', callback)
     else
       console.log('die')
-      callback()
+      callback() if callback
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)
   window.QF.actions = $.extend(window.QF.actions, actions)
