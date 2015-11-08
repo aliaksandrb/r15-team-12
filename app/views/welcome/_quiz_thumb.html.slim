@@ -3,4 +3,4 @@
     = image_tag "image#{index + 1}.png", alt: 'play the quiz', class: 'img-responsive img-portfolio img-hover'
     .caption
       h3 = quiz.name.truncate(15, omission: '... (continue)')
-      p = quiz.author_email.truncate(25, omission: '... (continue)')
+      p = quiz.description.truncate(25, omission: '... (continue)')

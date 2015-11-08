@@ -16,6 +16,7 @@ table
       tr
         td = quiz.name
         td = quiz.fail_limit
+        td = quiz.description
         td = quiz.author_email
         td = link_to 'Play It!', new_quiz_game_path(quiz), class: 'btn btn-warning'
         td = link_to 'Show', quiz, class: 'btn btn-default'
