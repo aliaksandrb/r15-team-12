@@ -1,0 +1,48 @@
+$bg-color: #000;
+
+section#header-menu {
+  .jumbotron {
+    background-color: $bg-color;
+    border: 1px solid #fff;
+
+    font-size: 26px;
+    font-weight: bold;
+  }
+}
+
+section#versus {
+  .vs-wrapper {
+    position: relative;
+    height: 226px;
+
+    .image-vs-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+
+    }
+
+    .main-buttons {
+      position: absolute;
+      width: 100%;
+      top: 100px;
+      color: #fff;
+
+      .btn-block {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+}
+
+section#recent-games {
+  .thumbnail {
+    background-color: $bg-color;
+
+    .caption {
+      color: #fff;
+    }
+  }
+}

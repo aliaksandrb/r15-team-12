@@ -121,6 +121,12 @@ $(document).on 'page:change', ->
     fatality: (hero, value = 0, dir = 'left') ->
       styles.fatality(hero)
       stop(hero, 1000)
+
+    revert: ->
+      heroes.guy.css({ marginLeft: '0px' })
+     #heroes.guy.css({ marginRigth: '0px' })
+      heroes.neptune.css({ marginRight: '0px' })
+     #heroes.neptune.css({ marginLeft: '0px' })
   }
 
   steps_manager = (hero_step, direction) ->
@@ -148,18 +154,20 @@ $(document).on 'page:change', ->
      else
        stop(heroes.guy)
        stop(heroes.neptune)
+       actions.revert()
        callback() if callback
 
   # response parser
   parse_answer_response = (data_json, callback) ->
-    if data_json.game_status == 'round'
-      all_steps = data_json.steps
+    all_steps = data_json.steps
 
+    if data_json.game_status == 'round'
       procced_steps(all_steps, callback)
     else
-      alert('END GAME')
+      procced_steps(all_steps, callback)
+      #alert('END GAME')
       # play fatality here
-      callback() if callback
+      #callback() if callback
 
 
   window.QF.heroes = $.extend(window.QF.heroes, heroes)

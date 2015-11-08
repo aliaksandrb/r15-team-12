@@ -16,3 +16,18 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+$bg-color: #000;
+
+body {
+  background-color: $bg-color;
+  color: #fff;
+}
+
+main {
+  @extend .container;
+  background-color: $bg-color;
+  padding-bottom: 80px;
+  width: 100%;
+  margin-top: 51px;
+  }
