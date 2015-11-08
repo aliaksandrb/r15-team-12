@@ -88,7 +88,7 @@ module StepGenerator
     result << [ move(pos[0][0]),      move(pos[0][1]) ]
     result << [ move(pos[1][0]),      move(pos[1][1]) ]
     result << [ attack,               hurt(hurts[0]) ]
-    result << [ retreet(pos[2][0]),   move(pos[2][1]) ]
+    result << [ move(pos[2][0]),      move(pos[2][1]) ]
     result << [ attack,               attack ]
     result << [ move(pos[3][0]),      move(pos[3][1]) ]
     result << [ blocked_attack ]
@@ -102,7 +102,6 @@ module StepGenerator
     result = []
     pos = fight_movement_steps(4)
     hurts = damage(healths, left_lead)
-
 
     result << [ move(pos[0][0]),      move(pos[0][1]) ]
     result << [ move(pos[1][0]),      move(pos[1][1]) ]
